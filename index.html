@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Press Start 2P" rel="stylesheet">
+    <link rel="stylesheet" href="menu.css">
+
+</head>
+
+<body>
+    <audio id="myaudio" controls autoplay loop hidden>
+        <source src="assets/bgm.mp3" type="audio/mpeg">
+    </audio>
+    <div class="setting">
+        <button id="myBtn" class="btn-setting"><i class="fa-solid fa-gear fa-xl"></i></button>
+    </div>
+    <div class="container">
+        <img src="assets/judul_zombie.png" alt="judul" class="center">
+        <div class="menu">
+            <h3 class="credit">
+                <b>Credits:</b><br>
+                Josh Darren P. | c14220218<br>
+                Jovan Andhika | c14220013<br>
+                Terrence Oscar | c14220003<br>
+                Daniel Christopher | c14220006
+            </h3>
+            <a href="game.html">
+                <button class="btn-start">Start</button>
+            </a>
+        </div>
+        <div>
+
+        </div>
+    </div>
+
+    <div class="robber-left robber-right robber-down robber-up" style="margin-top: 30px;"></div>
+    <div class="robber" style="margin-top: 40px;"></div>
+
+    <div id="myModal" class="modal" active="false">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="menu">
+                <h2 class="title">Volume Control</h2>
+                <input type="range" min="0" max="100" value="25" class="slider" id="myRange">
+                <button id="mute-btn" mute="false" class="btn-mute">Mute</button>
+                <!-- <a  mute="false"><i class="fa-solid fa-music fa-xl"></i></a> -->
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var audio = document.getElementById("myaudio");
+        audio.volume = 0.25;
+        // audio.muted = true;
+
+        var btnMute = $("#mute-btn");
+        var volume = $("#myRange");
+
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+        const keyboard = document.querySelector("body");
+
+        keyboard.addEventListener("keydown", e => {
+            // console.log(e);
+            if (e.keyCode == 27) {
+                if ($("#myModal").attr("active") == "false") {
+                    modal.style.display = "block";
+                    $("#myModal").attr("active", "true");
+                } else {
+                    modal.style.display = "none";
+                    $("#myModal").attr("active", "false");
+                }
+            }
+        })
+
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        volume.on("input", function () {
+            // console.log(volume.val());
+            audio.volume = volume.val() / 100;
+        });
+
+        btnMute.click(function () {
+            if (btnMute.attr("mute") == "false") {
+                audio.muted = true;
+                btnMute.attr("mute", "true");
+                btnMute.html("Unmuted");
+            } else {
+                audio.muted = false;
+                btnMute.attr("mute", "false");
+                btnMute.html("Mute");
+            }
+        });
+
+        // audio.volume = 0.1;
+    </script>
+</body>
+
+</html>
