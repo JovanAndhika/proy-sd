@@ -1,3 +1,34 @@
+
+class Queue {
+  constructor() {
+      this.items = {}
+      this.frontIndex = 0
+      this.backIndex = 0
+  }
+  enqueue(item) {
+      this.items[this.backIndex] = item
+      this.backIndex++
+      return item + ' inserted'
+  }
+  dequeue() {
+      const item = this.items[this.frontIndex]
+      delete this.items[this.frontIndex]
+      this.frontIndex++
+      return item
+  }
+  peek() {
+      return this.items[this.frontIndex]
+  }
+  get printQueue() {
+      return this.items;
+  }
+}
+const queueRow = new Queue();
+const queueCol = new Queue();
+
+
+
+//BUAT GRAPH
 var noAccess = false;
 var graphMatrix = [
                     [0,1,1,0,0,0,0,0,0],
@@ -10,14 +41,32 @@ var graphMatrix = [
                     [0,0,0,0,0,1,1,0,0],
                     [0,0,0,0,0,0,1,0,0],
                   ];
+var temp = graphMatrix;
 
-var arrYPosition = [-1, 1]
-var arrxPosition = [-1, 1];
+var visited = [
+  [false,false,false,false,false,false,false,false,false],
+  [false,false,false,false,false,false,false,false,false],
+  [false,false,false,false,false,false,false,false,false],
+
+  [false,false,false,false,false,false,false,false,false],
+  [false,false,false,false,false,false,false,false,false],
+  [false,false,false,false,false,false,false,false,false],
+
+  [false,false,false,false,false,false,false,false,false],
+  [false,false,false,false,false,false,false,false,false],
+  [false,false,false,false,false,false,false,false,false]
+];
+
+
+//DESKRIPSI GAME
+var max_block = 5;
+var max_zombieEnergy = 9;
+var rowPosition = [-1, 1, 0, 0]
+var columnPosition = [0, 0, 1, -1];
 
 function startGame(){
-var x_position = 4;
-var y_position = 4;
-var zombie_position = graphMatrix[x_position][y_position];
+
+
 }
 
 
@@ -38,13 +87,19 @@ function clickNode(clicked_id){
 
 
 function djikstra(){
-  const randomYIndex = Math.floor(Math.random() * arrYPosition.length);
-  const randomXIndex = Math.floor(Math.random() * arrxPosition.length);
-  
-  const itemy = arrYPosition[randomYIndex];
-  const itemx = arrxPosition[randomXIndex];
 
-  console.log(itemy);
+}
+
+
+function checkPosition(){
+
+}
+
+
+function solve(startRow, startColumn){
+  queueRow.enqueue(startRow);
+  queueCol.enqueue(startColumn);
+  visited[startRow][startColumn] = true;
 }
 
 
