@@ -57,7 +57,7 @@ const graphNumber = [
 // ];
 // var tempAdjent = graphAdjen;
 
-var tiles = [
+let tiles = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -67,13 +67,12 @@ var tiles = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
-function setTiles(tiles, x, y){
+function setTiles(tiles, x, y) {
   tiles[x][y] = 0;
 }
-
-
 
 //DESKRIPSI GAME
 var max_block = 5;
@@ -187,9 +186,9 @@ function clickNode(id) {
 
         document.getElementById(id).style.backgroundColor = "red";
         setTiles(tiles, i, j);
+        alert(tiles[i][j]);
         countTile += 1;
       }
-
       countId += 1;
     }
   }
@@ -200,7 +199,9 @@ myObj = new ShortestPathBetweenCells();
 function execute() {
   //find path
   let start1 = [0, 2];
-  let end1 = [6, 6];
+  let end1 = [7, 6];
   console.log("case: ");
   myObj.shortestPath(tiles, start1, end1);
 }
+
+
