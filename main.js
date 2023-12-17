@@ -1,33 +1,34 @@
 class Queue {
   constructor() {
-    this.items = [];
-    this.frontIndex = 0;
-    this.backIndex = 0;
+    this.elements = {};
+    this.head = 0;
+    this.tail = 0;
   }
-  enqueue(item) {
-    this.items[this.backIndex] = item;
-    this.backIndex++;
-    return item + " inserted";
+  enqueue(element) {
+    this.elements[this.tail] = element;
+    this.tail++;
   }
   dequeue() {
-    const item = this.items[this.frontIndex];
-    delete this.items[this.frontIndex];
-    this.frontIndex++;
+    const item = this.elements[this.head];
+    delete this.elements[this.head];
+    this.head++;
     return item;
   }
-
-  get Length() {
-    return this.backIndex - this.frontIndex;
-  }
-
   peek() {
-    return this.items[this.frontIndex];
+    return this.elements[this.head];
+  }
+  get length() {
+    return this.tail - this.head;
+  }
+  get isEmpty() {
+    return this.length === 0;
   }
   get printQueue() {
-    return this.items;
+    return this.elements;
   }
 }
-const qu = new Queue();
+let queue_spX = new Queue();
+let queue_spY = new Queue();
 
 //BUAT GRAPH
 const graphNumber = [
@@ -92,19 +93,23 @@ class Cell {
 
 class ShortestPathBetweenCells {
   //BFS, Time O(n^2), Space O(n^2)
-  shortestPath(matrix, start, end) {
+  shortestPath(tiles, start, end) {
+    //start node
     var sx = start[0];
     var sy = start[1];
+
+    //end node
     var dx = end[0];
     var dy = end[1];
+
     // if start or end value is 0, return
-    if (matrix[sx][sy] === 0 || matrix[dx][dy] === 0) {
+    if (tiles[sx][sy] === 0 || tiles[dx][dy] === 0) {
       console.log("There is no path.");
       return;
     }
     // initialize the cells
-    var m = matrix.length;
-    var n = matrix[0].length;
+    var m = tiles.length;
+    var n = tiles[0].length;
     var cells = [];
     for (let i = 0; i < m; i++) {
       cells[i] = [];
@@ -146,23 +151,22 @@ class ShortestPathBetweenCells {
       } while (p != null);
 
       console.log("Shortest path: ");
-      path.forEach((cell) => console.log(cell.toString()));
+      path.forEach((p) => console.log(p));
+      path.forEach((p) => queue_spX.enqueue(p.x));
+      path.forEach((p) => queue_spY.enqueue(p.y));
     }
   }
 
   visit(cells, queue, x, y, parent) {
-    //out of boundary
     if (
       x < 0 ||
       x >= cells.length ||
       y < 0 ||
       y >= cells[0].length ||
-      cells[x][y] == null
+      tiles[x][y] === 0
     ) {
       return;
     }
-
-    //update distance , prev node
     var dist = parent.dist + 1;
     var p = cells[x][y];
     if (dist < p.dist) {
@@ -186,7 +190,7 @@ function clickNode(id) {
 
         document.getElementById(id).style.backgroundColor = "red";
         setTiles(tiles, i, j);
-        alert(tiles[i][j]);
+        // alert(tiles[i][j]);
         countTile += 1;
       }
       countId += 1;
@@ -202,4 +206,6 @@ function execute() {
   let end1 = [7, 6];
   console.log("case: ");
   myObj.shortestPath(tiles, start1, end1);
+  console.log(queue_spX.printQueue);
+  console.log(queue_spY.printQueue);
 }
