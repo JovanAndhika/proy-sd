@@ -62,9 +62,9 @@ var tiles = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 0, 1, 1, 1],
+  [1, 1, 1, 1, 1, 0, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
@@ -92,56 +92,56 @@ class ShortestPathBetweenCells {
     var sy = start[1];
     var dx = end[0];
     var dy = end[1];
-    if (tiles[sx][sy] == 0 || tiles[dx][dy] == 0) {
+    // if start or end value is 0, return
+    if (tiles[sx][sy] === 0 || tiles[dx][dy] === 0) {
       console.log("There is no path.");
       return;
     }
-
-    //initialize the cells
+    // initialize the cells
     var m = tiles.length;
     var n = tiles[0].length;
-    var cells = []; //visited
+    var cells = [];
     for (let i = 0; i < m; i++) {
       cells[i] = [];
       for (let j = 0; j < n; j++) {
-        if (tiles[i][j] != 0) {
-          cells[i][j] = new Cell(i, j, Number.MAX_VALUE, null);
-        }
+        cells[i][j] = new Cell(i, j, Number.MAX_VALUE, null);
       }
     }
-    //breadth first search
+
+    // breadth first search
     var queue = [];
     var src = cells[sx][sy];
     src.dist = 0;
     queue.push(src);
     var dest = null;
     var p;
-    while ((p = queue.shift()) != null) {
-      //find destination
-      if (p.x == dx && p.y == dy) {
+    while (queue.length > 0) {
+      p = queue.shift();
+      // find destination
+      if (p.x === dx && p.y === dy) {
         dest = p;
         break;
       }
-      // moving up
+      // moving up, left, down, right
       this.visit(cells, queue, p.x - 1, p.y, p);
-      // moving left
       this.visit(cells, queue, p.x, p.y - 1, p);
-      // moving down
       this.visit(cells, queue, p.x + 1, p.y, p);
-      //moving right
       this.visit(cells, queue, p.x, p.y + 1, p);
     }
 
-    if (dest == null) {
-      console.log("there is no path.");
+    if (dest == null || dest.dist === Number.MAX_VALUE) {
+      console.log("There is no path.");
       return;
     } else {
       let path = [];
       p = dest;
       do {
         path.unshift(p);
-      } while ((p = p.prev) != null);
-      console.log(`${path}`);
+        p = p.prev;
+      } while (p != null);
+
+      console.log("Shortest path: ");
+      path.forEach((cell) => console.log(cell.toString()));
     }
   }
 
@@ -180,7 +180,7 @@ function clickNode(id) {
         }
 
         document.getElementById(id).style.backgroundColor = "red";
-        tiles[i][j] = 0;
+        tiles[i][j]=0;
         countTile += 1;
       }
 
@@ -198,5 +198,3 @@ function execute() {
   console.log("case: ");
   myObj.shortestPath(tiles, start1, end1);
 }
-
-
