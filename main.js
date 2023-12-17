@@ -62,12 +62,18 @@ var tiles = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 0, 0, 0, 1],
-  [1, 1, 1, 1, 1, 0, 1, 1, 1],
-  [1, 1, 1, 1, 1, 0, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
+
+function setTiles(tiles, x, y){
+  tiles[x][y] = 0;
+}
+
+
 
 //DESKRIPSI GAME
 var max_block = 5;
@@ -180,7 +186,7 @@ function clickNode(id) {
         }
 
         document.getElementById(id).style.backgroundColor = "red";
-        tiles[i][j]=0;
+        setTiles(tiles, i, j);
         countTile += 1;
       }
 
