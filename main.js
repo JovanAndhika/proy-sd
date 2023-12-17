@@ -57,7 +57,6 @@ const graphNumber = [
 // ];
 // var tempAdjent = graphAdjen;
 
-
 var tiles = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -86,27 +85,26 @@ class Cell {
   }
 }
 
-class ShortestPathBetweenCellsBFS {
+class ShortestPathBetweenCells {
   //BFS, Time O(n^2), Space O(n^2)
   shortestPath(tiles, start, end) {
     var sx = start[0];
     var sy = start[1];
     var dx = end[0];
     var dy = end[1];
-    if (matrix[sx][sy] == 0 || matrix[dx][dy] == 0) {
+    if (tiles[sx][sy] == 0 || tiles[dx][dy] == 0) {
       console.log("There is no path.");
       return;
     }
 
-
     //initialize the cells
-    var m = matrix.length;
-    var n = matrix[0].length;
+    var m = tiles.length;
+    var n = tiles[0].length;
     var cells = []; //visited
     for (let i = 0; i < m; i++) {
       cells[i] = [];
       for (let j = 0; j < n; j++) {
-        if (matrix[i][j] != 0) {
+        if (tiles[i][j] != 0) {
           cells[i][j] = new Cell(i, j, Number.MAX_VALUE, null);
         }
       }
@@ -171,32 +169,34 @@ class ShortestPathBetweenCellsBFS {
 }
 
 var countTile = 0;
-function clickNode(id){
+function clickNode(id) {
   let countId = 0;
-  for(let i = 0; i < graphNumber.length; i++){
-    for(let j = 0; j < graphNumber[i].length; j++){
-      if(countId == id){
-
-        if(countTile == max_block){
-          alert('maximum tile selected');
+  for (let i = 0; i < graphNumber.length; i++) {
+    for (let j = 0; j < graphNumber[i].length; j++) {
+      if (countId == id) {
+        if (countTile == max_block) {
+          alert("maximum tile selected");
           return;
         }
 
-        document.getElementById(id).style.backgroundColor = 'red';
+        document.getElementById(id).style.backgroundColor = "red";
         tiles[i][j] = 0;
         countTile += 1;
       }
-  
+
       countId += 1;
     }
   }
 }
 
+myObj = new ShortestPathBetweenCells();
 
-myObj = new ShortestPathBetweenCellsBFS();
+function execute() {
+  //find path
+  let start1 = [0, 2];
+  let end1 = [6, 6];
+  console.log("case: ");
+  myObj.shortestPath(tiles, start1, end1);
+}
 
-//find path
-let start1 = [0, 2];
-let end1 = [6, 6];
-console.log("case: ");
-myObj.shortestPath(tiles, start1, end1);
+
