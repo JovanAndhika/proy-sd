@@ -77,7 +77,7 @@ function setTiles(tiles, x, y) {
 
 //DESKRIPSI GAME
 var max_block = 5;
-var max_zombieEnergy = 9;
+var max_zombieEnergy = 15;
 
 class Cell {
   constructor(x, y, dist, prev) {
@@ -149,6 +149,16 @@ class ShortestPathBetweenCells {
         path.unshift(p);
         p = p.prev;
       } while (p != null);
+
+      if(path.length <= 3){
+        alert("you're cheating");
+      }
+
+      if(path.length >= max_zombieEnergy){
+        alert("you win");
+      }else{
+        alert("you lose");
+      }
 
       console.log("Shortest path: ");
       path.forEach((p) => console.log(p));
