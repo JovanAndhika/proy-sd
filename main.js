@@ -67,7 +67,7 @@ let tiles = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1]
+  [1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 
 function setTiles(tiles, x, y) {
@@ -92,19 +92,19 @@ class Cell {
 
 class ShortestPathBetweenCells {
   //BFS, Time O(n^2), Space O(n^2)
-  shortestPath(tiles, start, end) {
+  shortestPath(matrix, start, end) {
     var sx = start[0];
     var sy = start[1];
     var dx = end[0];
     var dy = end[1];
     // if start or end value is 0, return
-    if (tiles[sx][sy] === 0 || tiles[dx][dy] === 0) {
+    if (matrix[sx][sy] === 0 || matrix[dx][dy] === 0) {
       console.log("There is no path.");
       return;
     }
     // initialize the cells
-    var m = tiles.length;
-    var n = tiles[0].length;
+    var m = matrix.length;
+    var n = matrix[0].length;
     var cells = [];
     for (let i = 0; i < m; i++) {
       cells[i] = [];
@@ -203,5 +203,3 @@ function execute() {
   console.log("case: ");
   myObj.shortestPath(tiles, start1, end1);
 }
-
-
