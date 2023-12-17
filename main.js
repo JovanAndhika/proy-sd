@@ -62,9 +62,9 @@ var tiles = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 0, 0, 0, 1],
-  [1, 1, 1, 1, 1, 0, 1, 1, 1],
-  [1, 1, 1, 1, 1, 0, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
@@ -198,3 +198,51 @@ function execute() {
   console.log("case: ");
   myObj.shortestPath(tiles, start1, end1);
 }
+
+function addClickListeners() {
+  // Loop through each row
+  for (let i = 0; i < graphNumber.length; i++) {
+    // Loop through each column
+    for (let j = 0; j < graphNumber[i].length; j++) {
+      // Get the element by ID
+      const element = document.getElementById(graphNumber[i][j]);
+
+      // Add a click event listener to the element
+      element.addEventListener("click", function () {
+        clickNode(graphNumber[i][j]);
+      });
+    }
+  }
+}
+
+// Function to handle the click event
+function clickNode(id) {
+  // Check if the maximum tile limit has been reached
+  if (countTile == max_block) {
+    alert("Maximum tile selected");
+    return;
+  }
+
+  // Get the row and column index from the graphNumber array
+  let rowIndex, colIndex;
+  for (let i = 0; i < graphNumber.length; i++) {
+    const index = graphNumber[i].indexOf(id);
+    if (index !== -1) {
+      rowIndex = i;
+      colIndex = index;
+      break;
+    }
+  }
+
+  // Change the background color and update the tiles array
+  document.getElementById(id).style.backgroundColor = "red";
+  tiles[rowIndex][colIndex] = 0;
+  countTile += 1;
+  alert(tiles[rowIndex][colIndex]);
+}
+
+// Call the function to add click listeners once the DOM is loaded
+document.addEventListener("DOMContentLoaded", function () {
+  addClickListeners();
+});
+
