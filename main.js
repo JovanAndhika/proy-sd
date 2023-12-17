@@ -198,7 +198,7 @@ myObj = new ShortestPathBetweenCells();
 
 function execute() {
   //find path
-  let start1 = [0, 2];
+  let start1 = [2, 0];
   let end1 = [7, 6];
   console.log("case: ");
   myObj.shortestPath(tiles, start1, end1);
