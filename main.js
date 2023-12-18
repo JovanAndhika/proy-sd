@@ -1,3 +1,4 @@
+//JOVAN
 class Queue {
   constructor() {
     this.elements = {};
@@ -30,6 +31,8 @@ class Queue {
 let queue_spX = new Queue();
 let queue_spY = new Queue();
 
+
+//JOVAN
 //BUAT GRAPH
 const graphNumber = [
   [0, 1, 2, 3, 4, 5, 6, 7, 8],
@@ -43,6 +46,7 @@ const graphNumber = [
   [72, 73, 74, 75, 76, 77, 78, 79, 80],
   [81, 82, 83, 84, 85, 86, 87, 88, 89],
 ];
+
 
 //BUAT EDGES GRAPH
 // const graphAdjen = [
@@ -58,6 +62,8 @@ const graphNumber = [
 // ];
 // var tempAdjent = graphAdjen;
 
+
+//DANIEL
 let tiles = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -71,6 +77,7 @@ let tiles = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 
+//JOVAN
 function setTiles(tiles, x, y) {
   tiles[x][y] = 0;
 }
@@ -92,7 +99,7 @@ class Cell {
 }
 
 class ShortestPathBetweenCells {
-  //BFS, Time O(n^2), Space O(n^2)
+  //DISTANCE SHORT TERRENCE & JOVAN
   shortestPath(tiles, start, end) {
     //start node
     var sx = start[0];
@@ -117,6 +124,7 @@ class ShortestPathBetweenCells {
         cells[i][j] = new Cell(i, j, Number.MAX_VALUE, null);
       }
     }
+
 
     // breadth first search
     var queue = [];
@@ -150,15 +158,7 @@ class ShortestPathBetweenCells {
         p = p.prev;
       } while (p != null);
 
-      if(path.length <= 3){
-        alert("you're cheating");
-      }
-
-      if(path.length >= max_zombieEnergy){
-        alert("you win");
-      }else{
-        alert("you lose");
-      }
+      validOut(path);
 
       console.log("Shortest path: ");
       path.forEach((p) => console.log(p));
@@ -167,6 +167,21 @@ class ShortestPathBetweenCells {
     }
   }
 
+
+  //JOVAN
+  validOut(path){
+    if(path.length <= 3){
+      alert("you're cheating");
+    }
+
+    if(path.length >= max_zombieEnergy){
+      alert("you win");
+    }else{
+      alert("you lose");
+    }
+  }
+
+  //JOSH
   visit(cells, queue, x, y, parent) {
     if (
       x < 0 ||
@@ -187,6 +202,8 @@ class ShortestPathBetweenCells {
   }
 }
 
+
+//DANIEL
 var countTile = 0;
 function clickNode(id) {
   let countId = 0;
@@ -210,6 +227,7 @@ function clickNode(id) {
 
 myObj = new ShortestPathBetweenCells();
 
+//JOVAN
 function execute() {
   //find path
   let start1 = [2, 0];
