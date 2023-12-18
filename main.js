@@ -216,6 +216,11 @@ function clickNode(id) {
           return;
         }
 
+        if(id == 18 || id == 69){
+          alert("unable to block zombie or exit");
+          return
+        }
+
         document.getElementById(id).style.backgroundColor = "red";
         setTiles(tiles, i, j);
         // alert(tiles[i][j]);
