@@ -239,6 +239,8 @@ function execute() {
   console.log(queue_spY.printQueue);
 
 
+
+  //JOSH
   while (!queue_spX.isEmpty && !queue_spY.isEmpty) {
     let x = queue_spX.dequeue();
     let y = queue_spY.dequeue();
