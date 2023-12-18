@@ -158,26 +158,22 @@ class ShortestPathBetweenCells {
         p = p.prev;
       } while (p != null);
 
-      validOut(path);
+      
+      //JOVAN
+      if(path.length <= 3){
+        alert("you're cheating");
+      }
+  
+      if(path.length >= max_zombieEnergy){
+        alert("you win");
+      }else{
+        alert("you lose");
+      }
 
       console.log("Shortest path: ");
       path.forEach((p) => console.log(p));
       path.forEach((p) => queue_spX.enqueue(p.x));
       path.forEach((p) => queue_spY.enqueue(p.y));
-    }
-  }
-
-
-  //JOVAN
-  validOut(path){
-    if(path.length <= 3){
-      alert("you're cheating");
-    }
-
-    if(path.length >= max_zombieEnergy){
-      alert("you win");
-    }else{
-      alert("you lose");
     }
   }
 
