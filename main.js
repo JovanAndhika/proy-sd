@@ -84,7 +84,7 @@ function setTiles(tiles, x, y) {
 
 //DESKRIPSI GAME
 var max_block = 5;
-var max_zombieEnergy = 15;
+var max_zombieEnergy = 13;
 
 class Cell {
   constructor(x, y, dist, prev) {
