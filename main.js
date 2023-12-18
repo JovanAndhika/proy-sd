@@ -237,4 +237,18 @@ function execute() {
   myObj.shortestPath(tiles, start1, end1);
   console.log(queue_spX.printQueue);
   console.log(queue_spY.printQueue);
+
+
+  while (!queue_spX.isEmpty && !queue_spY.isEmpty) {
+    let x = queue_spX.dequeue();
+    let y = queue_spY.dequeue();
+    let buttonId = x * 9 + y;
+
+    let buttonElement = document.getElementById(buttonId.toString());
+    if (buttonElement) {
+      buttonElement.classList.remove('green');
+      buttonElement.classList.add('blue');
+    }
+  }
+  
 }
