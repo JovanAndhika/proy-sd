@@ -174,11 +174,6 @@ class ShortestPathBetweenCells {
     if(path.length <= 3){
       alert("you're cheating");
     }
-    
-    if(tiles[7][7] == 0 && tiles[7][5] == 0 && tiles[6][6] == 0 && tiles[8][6] == 0){
-      alert("cannot totally block the exit");
-    }
-
     if(path.length >= max_zombieEnergy){
       alert("you win");
     }else{
@@ -242,6 +237,11 @@ function execute() {
   //find path
   let start1 = [2, 0];
   let end1 = [7, 6];
+
+  if(tiles[7][7] == 0 && tiles[7][5] == 0 && tiles[6][6] == 0 && tiles[8][6] == 0){
+    alert("cannot totally block the exit");
+  }
+
   console.log("case: ");
   myObj.shortestPath(tiles, start1, end1);
   console.log(queue_spX.printQueue);
