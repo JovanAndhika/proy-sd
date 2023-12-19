@@ -56,6 +56,17 @@ body{
   margin: auto;
 }
 
+.blue {
+  background-color: blue;
+  height: 11.1%;
+  width: 11.1%;
+  max-height: 100vw;
+  max-width: 100vw;
+  float: left;
+  padding: 0;
+  margin: auto;
+}
+
 .character {
   position: absolute;
 }
@@ -68,15 +79,6 @@ button:hover{
 button:disabled {
   border-color: black;
 }
-
-/* .container{
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-} */
 
 #myBtn {
   padding: 10px;
@@ -93,219 +95,4 @@ button:disabled {
 
 .title {
   margin-bottom: 15px;
-}
-
-.btn-mute {
-    /* width: 30%; */
-    font-family: 'Press Start 2P';
-    margin-top: 20px;
-    background-color: gray;
-    /* width: 30%; */
-    padding: .5rem .5rem;
-    font-size: 1.25rem;
-    letter-spacing: .025em;
-}
-
-.slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 25px;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-}
-
-.slider:hover {
-  opacity: 1;
-}
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  background: #04AA6D;
-  cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  background: #04AA6D;
-  cursor: pointer;
-}
-
-.menu{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* width: 33.3%; */
-    margin-top: 2rem;
-    margin-bottom: 1.25rem;
-}
-
-.btn-difficulty{
-    font-family: 'Press Start 2P';
-    background-color:gray;
-    width: 100%;
-    padding: .5rem 0;
-    margin-bottom: .75rem;
-    font-size: 1.25rem;
-    letter-spacing: .025em;
-    border: 2px solid rgb(1, 57, 10);
-}
-
-.quit{
-  width: 70%;
-}
-.btn-quit{
-    font-family: 'Press Start 2P';
-    margin-top: 2em;
-    background-color:gray;
-    width: 100%;
-    padding: .5rem 0;
-    font-size: 1.25rem;
-    letter-spacing: .025em;
-    border: 2px solid rgb(1, 57, 10);
-}
-
-.btn-difficulty:hover{
-    background-color: rgb(1, 57, 10);
-    color: antiquewhite;
-    /* transform: scale(1.2); */
-}
-
-.btn-quit:hover{
-    /* transform: scale(1.3); */
-    background-color: red;
-    color: azure;
-    border: 2px solid rgba(197, 98, 98);
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1; 
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
-}
-
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.robber-right {
-  position: relative;
-  background: url(assets/char_kanan.png);
-  width: 107.5px;
-  height: 140px;
-  animation: walk 1s steps(4) infinite, forward 2s linear infinite;
-  animation-iteration-count: 1;
-  -webkit-animation-fill-mode: forwards;
-}
-
-.robber-left {
-  position: relative;
-  background: url(assets/char_kiri.png);
-  width: 107.5px;
-  height: 140px;
-  animation: walk 1s steps(4) infinite, forward 2s linear infinite;
-  animation-iteration-count: 1;
-  -webkit-animation-fill-mode: forwards;
-}
-
-.robber-down {
-  position: relative;
-  background: url(assets/char_maju.png);
-  width: 107.5px;
-  height: 140px;
-  animation: walk 1s steps(4) infinite, forward 2s linear infinite;
-  animation-iteration-count: 1;
-  -webkit-animation-fill-mode: forwards;
-}
-
-.robber-up {
-  position: relative;
-  background: url(assets/char_mundur.png);
-  width: 107.5px;
-  height: 140px;
-  animation: walk 1s steps(4) infinite, forward 2s linear infinite;
-  animation-iteration-count: 1;
-  -webkit-animation-fill-mode: forwards;
-}
-
-.start_char {
-  position: absolute;
-  left: 795px;
-  top: 315px;
-  width: 50.5px;
-  height: 50spx;
-}
-
-@keyframes walk {
-  0% {
-    background-position: 0px;
-  }
-  100% {
-    background-position: 440px;
-  }
-}
-
-@keyframes forward {
-  0% {
-    transform: translateX(-100px);
-  }
-  100% {
-    transform: translateX(140px);
-  }
-}
-h1{
-  text-align: center;
-}
-.win-lose{
-  font-family:'Press Start 2P';
-  font-size: xx-large;
-  position: fixed;
-  z-index: 1; 
-  top: 40%;
-  height: fit-content;
-  width: 100%;
-  padding: 5vh;
-}
-#win{
-  display: none;
-  color: #04915d;
-  background-color: #ffffff;
-}
-
-#lose{
-  display: none;
-  color: red;
-  background-color: black;
 }
