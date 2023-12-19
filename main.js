@@ -173,6 +173,8 @@ class ShortestPathBetweenCells {
   validOut(path){
     if(path.length <= 3){
       alert("you're cheating");
+    }else if(tiles[7][7] == 0 && tiles[7][5] == 0 && tiles[6][6] == 0 && tiles[8][6] == 0){
+      alert("cannot totally block the exit");
     }
 
     if(path.length >= max_zombieEnergy){
