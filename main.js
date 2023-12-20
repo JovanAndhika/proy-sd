@@ -136,11 +136,24 @@ class ShortestPathBetweenCells {
         dest = p;
         break;
       }
+
       // moving up, left, down, right
       this.visit(cells, queue, p.x - 1, p.y, p);
+      console.log("BFS route 1: ");
+      console.log(p.x - 1, p.y);
+
       this.visit(cells, queue, p.x, p.y - 1, p);
+      console.log("BFS route 2: ");
+      console.log(p.x, p.y - 1);
+
       this.visit(cells, queue, p.x + 1, p.y, p);
+      console.log("BFS route 3: ");
+      console.log(p.x + 1, p.y);
+
       this.visit(cells, queue, p.x, p.y + 1, p);
+      console.log("BFS route 4: ");
+      console.log(p.x, p.y + 1);
+      console.log("");
     }
 
     if (dest == null || dest.dist === Number.MAX_VALUE) {
@@ -189,6 +202,7 @@ class ShortestPathBetweenCells {
     }
     var dist = parent.dist + 1;
     var p = cells[x][y];
+
     if (dist < p.dist) {
       p.dist = dist;
       p.prev = parent;
@@ -198,7 +212,7 @@ class ShortestPathBetweenCells {
       let buttonId = x * 9 + y;
       let buttonElement = document.getElementById(buttonId.toString());
       if (buttonElement) {
-        buttonElement.style.backgroundColor = "yellow";
+        buttonElement.style.backgroundColor = "white";
       }
     }
   }
@@ -233,8 +247,8 @@ function clickNode(id) {
 
 myObj = new ShortestPathBetweenCells();
 
-
 //Generate random
+//JOSH
 function generateRandomNumber() {
   return Math.floor(Math.random() * 9);
 }
@@ -242,8 +256,7 @@ function generateRandomNumber() {
 let start1 = [generateRandomNumber(), generateRandomNumber()];
 let end1 = [generateRandomNumber(), generateRandomNumber()];
 
-document.addEventListener('DOMContentLoaded', function() {
-
+document.addEventListener("DOMContentLoaded", function () {
   let x1 = start1[0];
   let y1 = start1[1];
   let x2 = end1[0];
@@ -255,24 +268,25 @@ document.addEventListener('DOMContentLoaded', function() {
   function addImageAfterButton(imageSrc, buttonId) {
     let button = document.getElementById(buttonId.toString());
     if (button) {
-      let img = document.createElement('img');
+      let img = document.createElement("img");
       img.src = imageSrc;
-      img.style.width = '100%';
-      button.innerHTML = '';
+      img.style.width = "100%";
+      button.innerHTML = "";
       button.appendChild(img);
     }
   }
 
   // Tambahkan gambar zombie
-  addImageAfterButton('assets/zombie-kanan.gif', buttonIdZombie);
+  addImageAfterButton("assets/zombie-kanan.gif", buttonIdZombie);
 
   // Tambahkan gambar exit
-  addImageAfterButton('assets/exit.jpg', buttonIdExit);
+  addImageAfterButton("assets/exit.jpg", buttonIdExit);
 });
 
-//JOVAN
+//JOVAN & JOSH
 function execute() {
   //execute path
+  //JOVAN
   generateRandomNumber();
   if (
     tiles[7][7] == 0 &&
@@ -283,7 +297,7 @@ function execute() {
     alert("cannot totally block the exit");
   }
 
-  console.log("case: ");
+  //JOVAN
   myObj.shortestPath(tiles, start1, end1);
   console.log(queue_spX.printQueue);
   console.log(queue_spY.printQueue);
@@ -297,19 +311,6 @@ function execute() {
     let buttonElement = document.getElementById(buttonId.toString());
     if (buttonElement) {
       buttonElement.style.backgroundColor = "";
-      buttonElement.classList.remove("green");
-      buttonElement.classList.add("blue");
-    }
-  }
-
-  //JOSH
-  while (!queue_spX.isEmpty && !queue_spY.isEmpty) {
-    let x = queue_spX.dequeue();
-    let y = queue_spY.dequeue();
-    let buttonId = x * 9 + y;
-
-    let buttonElement = document.getElementById(buttonId.toString());
-    if (buttonElement) {
       buttonElement.classList.remove("green");
       buttonElement.classList.add("blue");
     }
