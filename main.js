@@ -31,7 +31,6 @@ class Queue {
 let queue_spX = new Queue();
 let queue_spY = new Queue();
 
-
 //JOVAN
 //BUAT GRAPH
 const graphNumber = [
@@ -47,7 +46,6 @@ const graphNumber = [
   [81, 82, 83, 84, 85, 86, 87, 88, 89],
 ];
 
-
 //BUAT EDGES GRAPH
 // const graphAdjen = [
 //   [0, 1, 1, 0, 0, 0, 0, 0, 0],
@@ -61,7 +59,6 @@ const graphNumber = [
 //   [0, 0, 0, 0, 0, 0, 1, 0, 0],
 // ];
 // var tempAdjent = graphAdjen;
-
 
 //DANIEL
 let tiles = [
@@ -125,7 +122,6 @@ class ShortestPathBetweenCells {
       }
     }
 
-
     // breadth first search
     var queue = [];
     var src = cells[sx][sy];
@@ -158,7 +154,6 @@ class ShortestPathBetweenCells {
         p = p.prev;
       } while (p != null);
 
-      
       //JOVAN
       this.validOut(path);
 
@@ -170,13 +165,13 @@ class ShortestPathBetweenCells {
   }
 
   //JOVAN
-  validOut(path){
-    if(path.length <= 3){
+  validOut(path) {
+    if (path.length <= 3) {
       alert("you're cheating");
     }
-    if(path.length >= max_zombieEnergy){
+    if (path.length >= max_zombieEnergy) {
       alert("you win");
-    }else{
+    } else {
       alert("you lose");
     }
   }
@@ -198,10 +193,16 @@ class ShortestPathBetweenCells {
       p.dist = dist;
       p.prev = parent;
       queue.push(p);
+
+      // Mengubah warna sel yang dikunjungi
+      let buttonId = x * 9 + y;
+      let buttonElement = document.getElementById(buttonId.toString());
+      if (buttonElement) {
+        buttonElement.style.backgroundColor = "yellow";
+      }
     }
   }
 }
-
 
 //DANIEL
 var countTile = 0;
@@ -215,9 +216,9 @@ function clickNode(id) {
           return;
         }
 
-        if(id == 18 || id == 69){
+        if (id == 18 || id == 69) {
           alert("unable to block zombie or exit");
-          return
+          return;
         }
 
         document.getElementById(id).style.backgroundColor = "red";
@@ -232,13 +233,53 @@ function clickNode(id) {
 
 myObj = new ShortestPathBetweenCells();
 
+
+//Generate random
+function generateRandomNumber() {
+  return Math.floor(Math.random() * 9);
+}
+
+let start1 = [generateRandomNumber(), generateRandomNumber()];
+let end1 = [generateRandomNumber(), generateRandomNumber()];
+
+document.addEventListener('DOMContentLoaded', function() {
+
+  let x1 = start1[0];
+  let y1 = start1[1];
+  let x2 = end1[0];
+  let y2 = end1[1];
+
+  let buttonIdZombie = x1 * 9 + y1;
+  let buttonIdExit = x2 * 9 + y2;
+
+  function addImageAfterButton(imageSrc, buttonId) {
+    let button = document.getElementById(buttonId.toString());
+    if (button) {
+      let img = document.createElement('img');
+      img.src = imageSrc;
+      img.style.width = '100%';
+      button.innerHTML = '';
+      button.appendChild(img);
+    }
+  }
+
+  // Tambahkan gambar zombie
+  addImageAfterButton('assets/zombie-kanan.gif', buttonIdZombie);
+
+  // Tambahkan gambar exit
+  addImageAfterButton('assets/exit.jpg', buttonIdExit);
+});
+
 //JOVAN
 function execute() {
-  //find path
-  let start1 = [2, 0];
-  let end1 = [7, 6];
-
-  if(tiles[7][7] == 0 && tiles[7][5] == 0 && tiles[6][6] == 0 && tiles[8][6] == 0){
+  //execute path
+  generateRandomNumber();
+  if (
+    tiles[7][7] == 0 &&
+    tiles[7][5] == 0 &&
+    tiles[6][6] == 0 &&
+    tiles[8][6] == 0
+  ) {
     alert("cannot totally block the exit");
   }
 
@@ -246,8 +287,6 @@ function execute() {
   myObj.shortestPath(tiles, start1, end1);
   console.log(queue_spX.printQueue);
   console.log(queue_spY.printQueue);
-
-
 
   //JOSH
   while (!queue_spX.isEmpty && !queue_spY.isEmpty) {
@@ -257,9 +296,22 @@ function execute() {
 
     let buttonElement = document.getElementById(buttonId.toString());
     if (buttonElement) {
-      buttonElement.classList.remove('green');
-      buttonElement.classList.add('blue');
+      buttonElement.style.backgroundColor = "";
+      buttonElement.classList.remove("green");
+      buttonElement.classList.add("blue");
     }
   }
-  
+
+  //JOSH
+  while (!queue_spX.isEmpty && !queue_spY.isEmpty) {
+    let x = queue_spX.dequeue();
+    let y = queue_spY.dequeue();
+    let buttonId = x * 9 + y;
+
+    let buttonElement = document.getElementById(buttonId.toString());
+    if (buttonElement) {
+      buttonElement.classList.remove("green");
+      buttonElement.classList.add("blue");
+    }
+  }
 }
