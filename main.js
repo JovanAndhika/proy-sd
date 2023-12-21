@@ -95,6 +95,8 @@ class Cell {
   }
 }
 
+var countValue = 1;
+
 class ShortestPathBetweenCells {
   //DISTANCE SHORT TERRENCE & JOVAN
   shortestPath(tiles, start, end) {
@@ -138,21 +140,25 @@ class ShortestPathBetweenCells {
       }
 
       // moving up, left, down, right
-      this.visit(cells, queue, p.x - 1, p.y, p);
+      this.visit(cells, queue, p.x - 1, p.y, p, countValue);
       console.log("BFS route 1: ");
       console.log(p.x - 1, p.y);
+      countValue = countValue+1;
 
-      this.visit(cells, queue, p.x, p.y - 1, p);
+      this.visit(cells, queue, p.x, p.y - 1, p, countValue);
       console.log("BFS route 2: ");
       console.log(p.x, p.y - 1);
+      countValue = countValue+1;
 
-      this.visit(cells, queue, p.x + 1, p.y, p);
+      this.visit(cells, queue, p.x + 1, p.y, p, countValue);
       console.log("BFS route 3: ");
       console.log(p.x + 1, p.y);
+      countValue = countValue+1;
 
-      this.visit(cells, queue, p.x, p.y + 1, p);
+      this.visit(cells, queue, p.x, p.y + 1, p, countValue);
       console.log("BFS route 4: ");
       console.log(p.x, p.y + 1);
+      countValue = countValue+1;
       console.log("");
     }
 
@@ -190,7 +196,7 @@ class ShortestPathBetweenCells {
   }
 
   //JOSH
-  visit(cells, queue, x, y, parent) {
+  visit(cells, queue, x, y, parent, countValue) {
     if (
       x < 0 ||
       x >= cells.length ||
@@ -200,6 +206,9 @@ class ShortestPathBetweenCells {
     ) {
       return;
     }
+    var doc_id = document.getElementById(graphNumber[x][y]);
+    doc_id.innerHTML = countValue;
+
     var dist = parent.dist + 1;
     var p = cells[x][y];
 
